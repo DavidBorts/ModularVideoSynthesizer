@@ -26,7 +26,7 @@ class Knob extends Group {
         const material = new THREE.SpriteMaterial({ map: knob_map, color: 0xdddddd });
         // material.emissive = 0xaaaaaa; DO WE NEED THIS?]
         const sprite = new THREE.Sprite(material);
-        sprite.scale.set(40, 40, 1); // change?
+        sprite.scale.set(parent.parent.KNOB_SCALING, parent.parent.KNOB_SCALING, 1); // change?
         sprite.position.x = x;
         sprite.position.y = y;
         sprite.position.z = 0.1;

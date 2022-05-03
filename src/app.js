@@ -29,7 +29,7 @@ let default_wire_colors = [0xff0000,0xffa500,0xffff00,0x008000,0x0000ff,0x4b0082
 const scene = new ControlPanel(WIDTH, HEIGHT);
 const renderer = new WebGLRenderer({ antialias: true });
 const aspectRatio = WIDTH / HEIGHT;
-const cameraWidth = 960;
+const cameraWidth = WIDTH;
 const cameraHeight = cameraWidth / aspectRatio;
 const camera = new OrthographicCamera(
     cameraWidth / -2, // left
@@ -48,27 +48,14 @@ var raycaster = new THREE.Raycaster();
 renderer.setPixelRatio(window.devicePixelRatio); //could this be the problem without setting size of renderer?
 renderer.setSize(WIDTH, HEIGHT);
 // renderer.setViewport(911, 530);
-console.log(renderer.getSize());
+//console.log(renderer.getSize());
 const canvas = renderer.domElement;
 canvas.style.display = 'block'; // Removes padding below canvas
 document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
-
-
 // DO WE NEED TO ADD ANY TEXT HERE? Tutorial popup?
-
-// WHAT DOES THIS DO?
-var context;
-//window.onload = function () {
-    //console.log("window onload");
-    //console.log("document", document);
-    //var canvas2 = document.getElementById("canvas2");
-    //console.log("canvas2",canvas2);
-    //context = canvas2.getContext("2d");
-    //console.log("context",context);
-//}
 
 
 // Render loop
@@ -107,22 +94,20 @@ function onMouseDown(e) {
     mouse.y /= HEIGHT;
     mouse.multiplyScalar(2);
     mouse.subScalar(1);
-    mouse.y *= -1;;
+    mouse.y *= -1;
 
     // Casting a ray to determine which object is being clicked on
     raycaster.setFromCamera(mouse, camera);
     var intersects = raycaster.intersectObjects(scene.get_objects(), true);
-    // wire, wire, button, module, background
-    // wire, wire
     if (intersects.length==0){return;}
     selected = intersects[0];
     while(selected.object.parent.name == "Button" && selected.object !== selected.object.parent.children[0]){
-        console.log("wire collision skip");
+        //console.log("wire collision skip");
         intersects.shift();
         if (intersects.length==0){return;}
         selected = intersects[0];
     }
-    console.log(selected.object.parent.name);
+    console.log("Mousedown event on ",selected.object.parent.name);
 
     if (selected.object.parent.name == "Button") {
         let clickedBtn = selected.object.parent;
@@ -190,19 +175,3 @@ function onMouseMoveKnob(event) {
     //console.log("onMouseMoveKnob with event Y ", event.pageY);
     CURRENT_KNOB.knobMove(CURRENT_KNOB, event.pageY);
 }
-
-
-
-// WHAT DOES THIS DO?? 
-// These 2 functions are the image display code from assignment 1, which will not work unless we make another canvas to be 2d.
-// Keeping it around as a backup plan for if DataTexture can't do what we want. 
-/*
-function displayImage(image, offsetX, offsetY) {
-    offsetX = offsetX || 0;
-    offsetY = offsetY || 0;
-    context.putImageData(image.getImageData(), offsetX, offsetY);
-}
-function clearDisplay() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-}; 
-*/

@@ -18,7 +18,6 @@ class Button extends Group {
         this.parent = parent;
         this.link_color = undefined;
         this.orig_color = color;
-        this.outgoing_wire_sprite = undefined; //input btns are the only ones that can make wire sprite children
         this.data = parent.createDataArray();
         this.linked = undefined; 
         
@@ -27,10 +26,10 @@ class Button extends Group {
         const button_map = new THREE.TextureLoader().load( 'src/assets/buttons/default_panel.png' );
         const material = new THREE.SpriteMaterial( { map: button_map, color: color } );
         const sprite = new THREE.Sprite( material );
-        sprite.scale.set(20, 20, 1 ); // change?
+        sprite.scale.set(parent.parent.BTN_SCALING, parent.parent.BTN_SCALING, 1 ); // change?
         this.position.x = x;// + parent.children[0].position.x;
         this.position.y = y;// + parent.children[0].position.y;
-        this.position.z = 0;// + + parent.children[0].position.z;
+        this.position.z = 0.1;// + + parent.children[0].position.z;
         this.add( sprite ); // this.children[0]
         return this;
     }
@@ -111,7 +110,7 @@ class Button extends Group {
         let dist = start.distanceTo(end);
         //console.log(this.getWorldPosition(), this.linked.getWorldPosition(), dist);
 
-        wire.scale.set(dist, 15, 1 ); // change?
+        wire.scale.set(dist, this.parent.parent.BTN_SCALING * 3/ 4, 1 ); // change?
         //wire.position.x += dist/2;
         
         let vecBetween = new THREE.Vector3().subVectors(end, start).normalize();

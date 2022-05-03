@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color } from 'three';
-import { Module, Screen } from 'objects';
+import { Module, Screen, Module_Map } from 'objects';
 import { BasicLights } from 'lights';
 
 class ControlPanel extends Scene {
@@ -16,8 +16,13 @@ class ControlPanel extends Scene {
         var MODULE_WIDTH = this.MODULE_WIDTH;
         this.MODULE_HEIGHT = this.height / 2;
         var MODULE_HEIGHT = this.MODULE_HEIGHT;
-        this.LFO_HEIGHT = this.MODULE_HEIGHT / 3;
+        this.LFO_HEIGHT = this.MODULE_HEIGHT / 2;
         var LFO_HEIGHT = this.LFO_HEIGHT;
+        this.BTN_SCALING = this.MODULE_WIDTH / 6;
+        this.KNOB_SCALING = this.MODULE_WIDTH / 3;
+
+        this.ModMap = new Module_Map();
+
 
         // Initialize state
         this.state = {
@@ -33,22 +38,19 @@ class ControlPanel extends Scene {
         let ymax = height / 2;
         let ymin = ymax * -1;
         let xmax = width / 2;
-        let xmin = xmax * -1;
+        let xmin = xmax * -1 + MODULE_WIDTH / 2;
         //let xmin = 0;
         //let xmax = width;
 
         // Add meshes to scene
         let num = 0;
         let num_LFO = 0;
-        // 3 LFOs
-        const LFO1 = new Module(this, "LFO", xmin + (num * MODULE_WIDTH) /*+ (MODULE_WIDTH / 2)*/, ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
-        const LFO2 = new Module(this, "LFO", xmin + (num * MODULE_WIDTH), ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
-        const LFO3 = new Module(this, "LFO", xmin + (num++ * MODULE_WIDTH), ymin + (num_LFO * LFO_HEIGHT) + (LFO_HEIGHT / 2));
-        // 3 color LFOs
+        // 4 LFOs
+        const LFO1 = new Module(this, "LFO", xmin + (num * MODULE_WIDTH), ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
+        const LFO2 = new Module(this, "LFO", xmin + (num++ * MODULE_WIDTH), ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
         num_LFO = 0;
-        const LFO_Color1 = new Module(this, "LFO_Color", xmin + (num * MODULE_WIDTH), ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
-        const LFO_Color2 = new Module(this, "LFO_Color", xmin + (num * MODULE_WIDTH), ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
-        const LFO_Color3 = new Module(this, "LFO_Color", xmin + (num++ * MODULE_WIDTH), ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
+        const LFO3 = new Module(this, "LFO", xmin + (num * MODULE_WIDTH), ymin + (num_LFO++ * LFO_HEIGHT) + (LFO_HEIGHT / 2));
+        const LFO4 = new Module(this, "LFO", xmin + (num++ * MODULE_WIDTH), ymin + (num_LFO * LFO_HEIGHT) + (LFO_HEIGHT / 2));
         // 3 Ramps
         const Ramp1 = new Module(this, "Ramp", xmin + (num++ * MODULE_WIDTH), ymin + (MODULE_HEIGHT / 2));
         const Ramp2 = new Module(this, "Ramp", xmin + (num++ * MODULE_WIDTH), ymin + (MODULE_HEIGHT / 2));
@@ -67,8 +69,8 @@ class ControlPanel extends Scene {
         this.Screen = new Screen(this, "Screen", Output, x_screen, y_screen);
         
         // Adding modules as children
-        this.add(LFO1, LFO2, LFO3, LFO_Color1, LFO_Color2, LFO_Color3,
-            Ramp1, Ramp2, Ramp3, Wave1, Wave2, Wave3, Vignette, Output, this.Screen);
+        this.add(LFO1, LFO2, LFO3, LFO4, Ramp1, Ramp2, Ramp3, Wave1, Wave2, 
+            Wave3, Vignette, Output, this.Screen);
         
         // Populate GUI
         // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
