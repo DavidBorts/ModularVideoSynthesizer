@@ -45,7 +45,7 @@ camera.lookAt(new Vector3(0, 0, 0));
 var raycaster = new THREE.Raycaster();
 
 // Set up renderer, canvas, and minor CSS adjustments
-renderer.setPixelRatio(window.devicePixelRatio); //could this be the problem without setting size of renderer?
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(WIDTH, HEIGHT);
 // renderer.setViewport(911, 530);
 //console.log(renderer.getSize());

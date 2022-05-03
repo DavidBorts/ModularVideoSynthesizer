@@ -18,15 +18,17 @@ class ControlPanel extends Scene {
         var MODULE_HEIGHT = this.MODULE_HEIGHT;
         this.LFO_HEIGHT = this.MODULE_HEIGHT / 2;
         var LFO_HEIGHT = this.LFO_HEIGHT;
-        this.BTN_SCALING = this.MODULE_WIDTH / 6;
-        this.KNOB_SCALING = this.MODULE_WIDTH / 3;
+        this.BTN_SCALING = this.MODULE_WIDTH / 4.2; //was 2.5
+
+        this.KNOB_SCALING = this.MODULE_WIDTH / 4;
+
 
         this.ModMap = new Module_Map();
 
 
         // Initialize state
         this.state = {
-            gui: new Dat.GUI(), // Create separate GUI for global scene effects
+            //gui: new Dat.GUI(), // Create separate GUI for global scene effects
             updateList: [],
             invalidateList: []
         };
@@ -77,7 +79,7 @@ class ControlPanel extends Scene {
     }
 
     addToUpdateList(object) {
-        this.state.updateList.push(object); // WIRES SHOULD NOT BE ADDED TO UPDATE LIST - WILL MESS UP RAYCASTING!!!
+        this.state.updateList.push(object); 
     }
 
     addToInvalidateList(object) {

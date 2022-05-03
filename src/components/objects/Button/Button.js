@@ -23,7 +23,7 @@ class Button extends Group {
         
 
         // Load in Button assets for input button
-        const button_map = new THREE.TextureLoader().load( 'src/assets/buttons/default_panel.png' );
+        const button_map = new THREE.TextureLoader().load( 'src/assets/buttons/port2.png' );
         const material = new THREE.SpriteMaterial( { map: button_map, color: color } );
         const sprite = new THREE.Sprite( material );
         sprite.scale.set(parent.parent.BTN_SCALING, parent.parent.BTN_SCALING, 1 ); // change?
@@ -92,36 +92,39 @@ class Button extends Group {
     }
 
     attach_wire(wire_color){
-        console.log("creating wire in color ",wire_color);
-        const wire_map = new THREE.TextureLoader().load( 'src/assets/Cables/cable_cropped.png' );
+        const wire_map = new THREE.TextureLoader().load( 'src/assets/Cables/cable4.png' );
         const material = new THREE.SpriteMaterial( { map: wire_map, color: wire_color } );
         let wire = new THREE.Sprite( material );
-        //wire.scale.set(100, 15, 1 ); // change?
-        //wire.position.x += 46;
-        //wire.position.y -= 3;
-
 
         let start = this.getWorldPosition();
         let end = this.linked.getWorldPosition();
-        //let start = this.linked.getWorldPosition();
-        //let end = this.getWorldPosition();
-
 
         let dist = start.distanceTo(end);
-        //console.log(this.getWorldPosition(), this.linked.getWorldPosition(), dist);
 
-        wire.scale.set(dist, this.parent.parent.BTN_SCALING * 3/ 4, 1 ); // change?
-        //wire.position.x += dist/2;
+        wire.scale.set(dist * 1.01, Math.pow(dist, 0.1)*this.parent.parent.BTN_SCALING/2, 1 ); // change?
+        console.log(wire.scale);
         
         let vecBetween = new THREE.Vector3().subVectors(end, start).normalize();
-        wire.position.addScaledVector(vecBetween, dist/2);
+        wire.position.addScaledVector(vecBetween, dist/2 * 1.00);
+
+
+
+        //put it in front of stuff
+        wire.position.z += 0.3;
+
+        //move slightly down or up
+        let v2 = new THREE.Vector3().copy(vecBetween);
+        v2.applyAxisAngle(new THREE.Vector3(0,0,1), -3.1415/2);
+        wire.position.addScaledVector(v2, Math.pow(dist, 0.1)*this.parent.parent.BTN_SCALING/5);
+        
         let wire_starting = new THREE.Vector3(1, 0, 0);
         let angle = wire_starting.angleTo(vecBetween);
-        wire.material.rotation = (wire.material.rotation - angle);
-        wire.position.z += 0.2;
-        vecBetween.applyAxisAngle(new THREE.Vector3(0,0,1), -3.1415/2);
-        wire.position.addScaledVector(vecBetween, 5);
-
+        if(start.y > end.y) {
+            wire.material.rotation = (wire.material.rotation - angle);
+        }
+        else {
+            wire.material.rotation = (wire.material.rotation + angle);
+        }
         this.add( wire );
     }
 

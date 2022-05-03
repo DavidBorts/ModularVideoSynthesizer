@@ -32,9 +32,9 @@ class Module extends Group {
         this.min_padding_vert = 2;
         this.min_padding_horiz = 2;
 
-        this.between_inputrow_spacincing_pct = 8;
-        this.between_outputrow_spacing_pct = 8;
-        this.between_knobrow_spacing_pct = 14;
+        this.between_inputrow_spacing_pct = 11;
+        this.between_outputrow_spacing_pct = 11;
+        this.between_knobrow_spacing_pct = 17;
 
 
         // Functions
@@ -68,7 +68,7 @@ class Module extends Group {
                 }
             }
             
-            // Interpolating between black and the input color, depending on x
+            // Interpolating between 0 and max value, depending on x
             let in1 = inputs[0];
             let in2 = inputs[1];
             let in3 = inputs[2];
@@ -113,15 +113,21 @@ class Module extends Group {
                 }
             }
             
-            // Interpolating between black and the input color, depending on x
-            const in1 = inputs[1];
-            const in2 = inputs[2];
-            const in3 = inputs[3];
-            const frequency = inputs[0];
+            // Interpolating between black and the maximum value, depending on x
+            const in1 = inputs[0];
+            const in2 = inputs[1];
+            const in3 = inputs[2];
+            const frequency = inputs[3];
 
-            output_list[0].data[x][y] = (in1 / 2) * Math.sin(frequency * x) + (in1 / 2);
-            output_list[1].data[x][y] = (in2 / 2) * Math.sin(frequency * x) + (in2 / 2);     
-            output_list[2].data[x][y] = (in3 / 2) * Math.sin(frequency * x) + (in3 / 2);  
+            // Wave along x-axis
+            output_list[0].data[x][y] = (in1 / 2) * Math.sin(frequency * y) + (in1 / 2);
+            output_list[1].data[x][y] = (in2 / 2) * Math.sin(frequency * y) + (in2 / 2);     
+            output_list[2].data[x][y] = (in3 / 2) * Math.sin(frequency * y) + (in3 / 2); 
+             
+            // Wave along y-axis
+            output_list[3].data[x][y] = (in1 / 2) * Math.sin(frequency * x) + (in1 / 2);
+            output_list[4].data[x][y] = (in2 / 2) * Math.sin(frequency * x) + (in2 / 2);     
+            output_list[5].data[x][y] = (in3 / 2) * Math.sin(frequency * x) + (in3 / 2);  
         };
         
         this.LFO_function = function(x, y, input_list, knob_list, output_list, timestep) {
@@ -158,9 +164,13 @@ class Module extends Group {
             const amplitude = inputs[1] / 2; // Divide to rescale to [0, 0.5] 
             const center = inputs[2];
 
-            let value =amplitude * Math.sin(frequency * timestep) + center;
-            if (value > 1) value = 1;
-            if (value < 0) value = 0;
+            let value = amplitude * Math.sin(frequency * timestep) + center;
+            if (value > 1) {
+                value = 1;
+            }
+            if (value < 0) {
+                value = 0;
+            }
 
             output_list[0].data[x][y] = value;
             output_list[1].data[x][y] = value;
@@ -235,8 +245,8 @@ class Module extends Group {
             let diagonal = Math.sqrt((100 * 100) * 2) / 2;
 
             // Finding the distance from the center of the image
-            let diffX = Math.pow((center_x - 1 - x), 2);
-            let diffY = Math.pow((center_y - 1 - y), 2);
+            let diffX = Math.pow((center_y - 1 - x), 2);
+            let diffY = Math.pow((center_x - 1 - y), 2);
             let distance = Math.sqrt(diffX + diffY);
 
             // Variables
@@ -398,7 +408,26 @@ class Module extends Group {
 
         // Load in panel assets
         // const map = new THREE.TextureLoader().load(`src/assets/modules/${this.name}_panel.png`);
-        const map = new THREE.TextureLoader().load(`src/assets/modules/default_panel.png`);
+        
+        let map;
+
+        switch (type) {
+            case "LFO":
+                map = new THREE.TextureLoader().load(`src/assets/modules/default_panel.png`);
+                break;
+            case "Ramp":
+                map = new THREE.TextureLoader().load(`src/assets/modules/Ramp.png`);
+                break;
+            case "Wave":
+                map = new THREE.TextureLoader().load(`src/assets/modules/Wave.png`);
+                break;
+            case "Vignette":
+                map = new THREE.TextureLoader().load(`src/assets/modules/Vignette.png`);
+                break;
+            case "Output":
+                map = new THREE.TextureLoader().load(`src/assets/modules/default_panel.png`);
+                break;
+        }
         const material = new THREE.SpriteMaterial({ map: map, sizeAttenuation: false });
         const sprite = new THREE.Sprite(material);
         //sprite.width = parent.MODULE_WIDTH;
@@ -432,7 +461,7 @@ class Module extends Group {
                 break;
             case "Wave":
                 num_inputs = 4; // Maximum value for channels 1-3, frequency
-                num_outputs = 3; // 3 output channels
+                num_outputs = 6; // 2 sets of 3 output channels (horizontal and vertical waves)
                 num_knobs = 4; // Maximum value for channels 1-3, frequency
                 break;
             case "Vignette":
@@ -449,31 +478,60 @@ class Module extends Group {
         }
 
         // NEW GUI SPACING ALGORITHM
-        for(var i = 0; i < module_map.length; i++) {
+         for(var i = 0; i < module_map.length; i++) {
             let start_y = MODULE_HEIGHT / 2 - module_map[i][0] * MODULE_HEIGHT / 100;
-            let inter_row_spacing;
+            let inter_row_spacing = MODULE_HEIGHT / 100;
             switch(module_map[i][1]){
                 case "in":
-
+                    inter_row_spacing *= this.between_inputrow_spacing_pct;
                     break;
                 case "knob":
-
+                    inter_row_spacing *= this.between_knobrow_spacing_pct;
                     break;
                 case "out":
-
+                    inter_row_spacing *= this.between_outputrow_spacing_pct;
                     break;
+            }
+            start_y -= inter_row_spacing;
+            let positions = module_map[i][2];
+            for(var x = 0; x < positions.length; x++){
+                let inter_col_spacing = MODULE_WIDTH / (positions[x].length+1);
+                let start_x = - MODULE_WIDTH / 2 + inter_col_spacing;
+                for(var y = 0; y < positions[x].length; y++) {
+                    let newItem;
+                    if(positions[x][y] ==1){
+                    switch(module_map[i][1]){
+                        case "in":
+                            newItem = new Button(this, "input", start_x + y * inter_col_spacing, start_y - x * inter_row_spacing, 0xccffcc);
+                            this.input_list.push(newItem);
+                            
+                            break;
+                        case "knob":
+                            newItem = new Knob(this, start_x + y * inter_col_spacing, start_y - x * inter_row_spacing);
+                            this.knob_list.push(newItem);
+                            break;
+                        case "out":
+                            newItem = new Button(this, "output", start_x + y * inter_col_spacing, start_y - x * inter_row_spacing, 0xccccff);
+                            this.output_list.push(newItem);
+                            
+                            break;
+                    }
+                    this.add(newItem);
+                    parent.addToUpdateList(newItem);}
+                }
             }
             
             
-        }
+        }  
 
 
 
 
 
+/*
 
 
-
+        
         // Creating input ports
         let num_rows_needed = num_inputs / this.input_btns_per_row;
         let center_this_block = 1 * MODULE_HEIGHT / 4;
@@ -517,6 +575,8 @@ class Module extends Group {
             this.add(knob);
             parent.addToUpdateList(knob);
         }
+        
+        */
 
         // Add self to parent's update and invalidate lists
         parent.addToUpdateList(this);

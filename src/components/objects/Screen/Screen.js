@@ -8,13 +8,20 @@ class Screen extends Group {
         // Call parent Group() constructor
         super();
 
+        //SCREEN FRAME: 0.45 Screen-widths Wide; 0.5 Screen-Heights Tall
+        //SIDE PANEL: 0.275 Screen-widths Wide; 0.5 Screen-Heights Tall
+        //So, if you can make the side panel sprite about 61% the width of the screen w/o changing screw ratio that would be awesome
+
+
         // Variables
         this.parent = parent;
         this.name = name;
+        this.hz_scale = 0.4;
+        this.vt_scale = 0.4;
         this.Output = Output; // Linking output module
         this.matrixWorldNeedsUpdate;
         this.data = []; 
-        // Initializing screen as black
+        // Initializing screen as yellow
         for (var x = 0; x < 100; x++) {
             let newRow = [];
             for (var y = 0; y < 100; y++) {
@@ -27,8 +34,25 @@ class Screen extends Group {
 
         // Setting screen position
         this.position.x = 0;
-        this.position.y = 190;
-        this.position.z = 0.5;
+        this.position.y = this.parent.height / 4;
+        this.position.z = 0.3;
+
+                //frame
+       let frame_map = new THREE.TextureLoader().load(`src/assets/Screen/screen_backpanel.png`);
+       let frame_material = new THREE.SpriteMaterial({map: frame_map});
+       //console.log(screen_material);
+       this.frame = new THREE.Sprite(frame_material);
+       this.frame.scale.set(this.parent.width * 0.45, this.parent.height * 0.5, 1);
+       //this.frame.position.set(0, 0, 0);
+       this.add(this.frame); 
+       this.panel_left = new THREE.Sprite(frame_material);
+       this.panel_left.scale.set(this.parent.width * 0.55/2, this.parent.height * 0.5, 1);
+       this.panel_left.position.set(-(0.55/4+0.45/2)*this.parent.width, 0, 0);
+       this.add(this.panel_left); 
+       this.panel_right = new THREE.Sprite(frame_material);
+       this.panel_right.scale.set(this.parent.width * 0.55/2, this.parent.height * 0.5, 1);
+       this.panel_right.position.set((0.55/4+0.45/2)*this.parent.width,0, 0);
+       this.add(this.panel_right); 
 
         //make a sprite with VideoTexture or DataTexture ?
         let screen_map = new THREE.DataTexture(this.img, 100, 100);
@@ -38,8 +62,13 @@ class Screen extends Group {
         let screen_material = new THREE.SpriteMaterial({map: screen_map});
         //console.log(screen_material);
         this.sprite = new THREE.Sprite(screen_material);
-        this.sprite.scale.set(500, 350, 1);
+        this.sprite.scale.set(this.hz_scale * this.parent.width, this.vt_scale *this.parent.height, 1);
         this.add(this.sprite);
+
+
+
+
+
         //this.display = new Image(); DO WE STILL NEED THIS?
         this.parent.addToUpdateList(this);
 
@@ -82,15 +111,14 @@ class Screen extends Group {
         // console.log(this.data[50][50] , " corresponds to  " , this.img[50 * 400 + 50 * 4], this.img[50 * 400 + 50 * 4 + 1], this.img[50 * 400 + 50 * 4 + 2]);
 
         // Update the screen with the new image at the current timestep
-        //let temp_child = this.children[1];
-        this.remove(this.children[1]);
+        this.remove(this.children[3]);
         const texture = new THREE.DataTexture(this.img, 100, 100);
         //console.log(this.img);
         texture.needsUpdate = true;
         let screen_material = new THREE.SpriteMaterial({map: texture});
         //console.log(screen_material);
         this.sprite = new THREE.Sprite(screen_material);
-        this.sprite.scale.set(500, 350, 1);
+        this.sprite.scale.set(this.hz_scale * this.parent.width, this.vt_scale *this.parent.height, 1);
         this.add(this.sprite);
         //console.log("sprite is now ", this.sprite);
     }
