@@ -1,6 +1,6 @@
 {
   "name": "modular-video-synthesizer",
-  "repository": "ModularVideoSynthesizer",
+  "repository": "MODULARVIDEOSYNTHESIZER",
   "version": "0.1.1",
   "title": "Modular Video Synthesizer",
   "description": "A video synthesis engine inspired by Eurorack modular synthesizers. Users can 'patch' together modules to generate unique, custom visuals.",
