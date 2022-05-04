@@ -92,7 +92,7 @@ class Button extends Group {
     }
 
     attach_wire(wire_color){
-        const wire_map = new THREE.TextureLoader().load( 'src/assets/Cables/cable4.png' );
+        const wire_map = new THREE.TextureLoader().load( 'src/assets/Cables/cable5.png' );
         const material = new THREE.SpriteMaterial( { map: wire_map, color: wire_color } );
         let wire = new THREE.Sprite( material );
 

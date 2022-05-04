@@ -305,8 +305,8 @@ class Module extends Group {
                 const input = input_list[i];
                 const source = input.linked;
                 var knob = undefined;
-                if (i < knob_list.length) {
-                    knob = knob_list[i];
+                if (i >= input_list.length - knob_list.length) {
+                    knob = knob_list[i - (input_list.length - knob_list.length)];
                 }
     
                 if (source === undefined) {
@@ -344,10 +344,10 @@ class Module extends Group {
             let wsum = 0;
 
             for (let i = 0; i < 3; i++) {
-                let h = inputs[3 +  (3 * i)] /* * 360*/; // Multiply to rescale to [0, 360]
-                let s = inputs[3 +  (3 * i) + 1];
-                let v = inputs[3 +  (3 * i) + 2];
-                let w = inputs[i];
+                let h = inputs[i];
+                let s = inputs[3  + i];
+                let v = inputs[6 + i];
+                let w = inputs[9 + i];
 
                 // convert from hsv to hsl
                 // (code from https://stackoverflow.com/a/31851617)
@@ -413,7 +413,7 @@ class Module extends Group {
 
         switch (type) {
             case "LFO":
-                map = new THREE.TextureLoader().load(`src/assets/modules/default_panel.png`);
+                map = new THREE.TextureLoader().load(`src/assets/modules/LFO.png`);
                 break;
             case "Ramp":
                 map = new THREE.TextureLoader().load(`src/assets/modules/Ramp.png`);
@@ -425,7 +425,7 @@ class Module extends Group {
                 map = new THREE.TextureLoader().load(`src/assets/modules/Vignette.png`);
                 break;
             case "Output":
-                map = new THREE.TextureLoader().load(`src/assets/modules/default_panel.png`);
+                map = new THREE.TextureLoader().load(`src/assets/modules/Output.png`);
                 break;
         }
         const material = new THREE.SpriteMaterial({ map: map, sizeAttenuation: false });
