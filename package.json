@@ -1,6 +1,6 @@
 {
   "name": "modular-video-synthesizer",
-  "repository": "MODULARVIDEOSYNTHESIZER",
+  "repository": "ModularVideoSynthesizer",
   "version": "0.1.1",
   "title": "Modular Video Synthesizer",
   "description": "A video synthesis engine inspired by Eurorack modular synthesizers. Users can 'patch' together modules to generate unique, custom visuals.",
@@ -19,7 +19,7 @@
     "start": "webpack-dev-server --mode development --output-public-path \"\"",
     "prebuild": "rimraf ./build && mkdirp ./build",
     "build": "npm run prebuild && webpack --mode production --progress --output-public-path \"\"",
-    "format": "prettier --write '*.js' 'src/**/*.js'",
+    "format": "prettier --write *.js src/**/*.js",
     "deploy": "npm run prebuild && webpack --mode production --progress && gh-pages -d build"
   },
   "dependencies": {
