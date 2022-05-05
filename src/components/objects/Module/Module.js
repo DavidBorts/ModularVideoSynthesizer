@@ -422,7 +422,9 @@ class Module extends Group {
                 map = new THREE.TextureLoader().load(`src/assets/modules/Wave.png`);
                 break;
             case "Vignette":
-                map = new THREE.TextureLoader().load(`src/assets/modules/Vignette.png`);
+                map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Vignette.png`);
+                //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Vignette.png
+                //src/assets/modules/Vignette.png
                 break;
             case "Output":
                 map = new THREE.TextureLoader().load(`src/assets/modules/Output.png`);
