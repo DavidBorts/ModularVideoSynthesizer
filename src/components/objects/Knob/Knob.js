@@ -21,7 +21,7 @@ class Knob extends Group {
 
         // Load in Button assets for input button
         let knob_map = new THREE.TextureLoader().load('https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/knobs/knob2.png');
-        knob_map.minFilter = THREE.LinearFilter;
+        // knob_map.minFilter = THREE.LinearFilter;
         const material = new THREE.SpriteMaterial({ map: knob_map, color: 0xdddddd });
         // material.emissive = 0xaaaaaa; DO WE NEED THIS?]
         const sprite = new THREE.Sprite(material);

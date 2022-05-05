@@ -25,7 +25,7 @@ class Button extends Group {
         // Load in Button assets for input button
         let button_map = new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/buttons/port2.png' );
         //src/assets/buttons/port2.png
-        button_map.minFilter = THREE.LinearFilter;
+        // button_map.minFilter = THREE.LinearFilter;
         const material = new THREE.SpriteMaterial( { map: button_map, color: color } );
         const sprite = new THREE.Sprite( material );
         sprite.scale.set(parent.parent.BTN_SCALING, parent.parent.BTN_SCALING, 1 ); // change?

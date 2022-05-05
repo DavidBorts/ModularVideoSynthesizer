@@ -414,25 +414,25 @@ class Module extends Group {
         switch (type) {
             case "LFO":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/LFO.png`);
-                map.minFilter = THREE.LinearFilter;
+                //map.minFilter = THREE.LinearFilter;
                 break;
             case "Ramp":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Ramp.png`);
-                map.minFilter = THREE.LinearFilter;
+                //map.minFilter = THREE.LinearFilter;
                 break;
             case "Wave":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Wave.png`);
-                map.minFilter = THREE.LinearFilter;
+                //map.minFilter = THREE.LinearFilter;
                 break;
             case "Vignette":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Vignette.png`);
-                map.minFilter = THREE.LinearFilter;
+                //map.minFilter = THREE.LinearFilter;
                 //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Vignette.png
                 //src/assets/modules/Vignette.png
                 break;
             case "Output":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Output.png`);
-                map.minFilter = THREE.LinearFilter;
+                //map.minFilter = THREE.LinearFilter;
                 //
                 //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Output.png
                 break;
