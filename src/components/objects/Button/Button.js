@@ -23,7 +23,8 @@ class Button extends Group {
         
 
         // Load in Button assets for input button
-        const button_map = new THREE.TextureLoader().load( 'src/assets/buttons/port2.png' );
+        const button_map = new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/buttons/port2.png' );
+        //src/assets/buttons/port2.png
         const material = new THREE.SpriteMaterial( { map: button_map, color: color } );
         const sprite = new THREE.Sprite( material );
         sprite.scale.set(parent.parent.BTN_SCALING, parent.parent.BTN_SCALING, 1 ); // change?
@@ -92,7 +93,8 @@ class Button extends Group {
     }
 
     attach_wire(wire_color){
-        const wire_map = new THREE.TextureLoader().load( 'src/assets/Cables/cable5.png' );
+        const wire_map = new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Cables/cable5.png' );
+        //arc/assets/Cables/cable5.png
         const material = new THREE.SpriteMaterial( { map: wire_map, color: wire_color } );
         let wire = new THREE.Sprite( material );
 

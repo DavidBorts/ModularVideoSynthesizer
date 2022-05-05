@@ -20,7 +20,7 @@ class Knob extends Group {
         var click_data = 0.5;
 
         // Load in Button assets for input button
-        const knob_map = new THREE.TextureLoader().load('src/assets/knobs/knob2.png');
+        const knob_map = new THREE.TextureLoader().load('https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/knobs/knob2.png');
         // map.minFilter = THREE.NearestMipmapNearestFilter; DO WE NEED SOMETHING LIKE THIS?
         // map.magFilter = THREE.NearestFilter; DO WE NEED SOMETHING LIKE THIS?
         const material = new THREE.SpriteMaterial({ map: knob_map, color: 0xdddddd });

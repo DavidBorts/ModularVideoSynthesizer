@@ -413,13 +413,13 @@ class Module extends Group {
 
         switch (type) {
             case "LFO":
-                map = new THREE.TextureLoader().load(`src/assets/modules/LFO.png`);
+                map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/LFO.png`);
                 break;
             case "Ramp":
-                map = new THREE.TextureLoader().load(`src/assets/modules/Ramp.png`);
+                map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Ramp.png`);
                 break;
             case "Wave":
-                map = new THREE.TextureLoader().load(`src/assets/modules/Wave.png`);
+                map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Wave.png`);
                 break;
             case "Vignette":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Vignette.png`);
@@ -427,7 +427,9 @@ class Module extends Group {
                 //src/assets/modules/Vignette.png
                 break;
             case "Output":
-                map = new THREE.TextureLoader().load(`src/assets/modules/Output.png`);
+                map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Output.png`);
+                //
+                //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Output.png
                 break;
         }
         const material = new THREE.SpriteMaterial({ map: map, sizeAttenuation: false });

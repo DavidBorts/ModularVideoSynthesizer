@@ -38,7 +38,9 @@ class Screen extends Group {
         this.position.z = 0.3;
 
                 //frame
-       let frame_map = new THREE.TextureLoader().load(`src/assets/Screen/screen_backpanel.png`);
+       let frame_map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_backpanel.png`);
+       //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets
+       //src/assets/Screen/screen_backpanel.png
        let frame_material = new THREE.SpriteMaterial({map: frame_map});
        //console.log(screen_material);
        this.frame = new THREE.Sprite(frame_material);
