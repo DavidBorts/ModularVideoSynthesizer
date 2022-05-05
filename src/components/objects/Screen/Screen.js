@@ -35,18 +35,20 @@ class Screen extends Group {
         //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets
         //src/assets/Screen/screen_backpanel.png
         let frame_material = new THREE.SpriteMaterial({ map: frame_map });
-        let side_map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_sidepanel.png`);
-        //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_sidepanel.png
-        //src/assets/Screen/screen_sidepanel.png
-        let side_material = new THREE.SpriteMaterial({ map: side_map });
+        let right_map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_rightpanel.png`);
+        let left_map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_leftpanel.png`);
+        //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_left/rightpanel.png
+        //src/assets/Screen/screen_left/rightpanel.png
+        let right_material = new THREE.SpriteMaterial({ map: right_map });
+        let left_material = new THREE.SpriteMaterial({ map: left_map });
         this.frame = new THREE.Sprite(frame_material);
         this.frame.scale.set(frame_width_scale, frame_height_scale, 1);
         this.add(this.frame);
-        this.panel_left = new THREE.Sprite(side_material);
+        this.panel_left = new THREE.Sprite(left_material);
         this.panel_left.scale.set(panel_width_scale, frame_height_scale, 1);
         this.panel_left.position.set(-panel_position_offset, 0, 0);
         this.add(this.panel_left);
-        this.panel_right = new THREE.Sprite(side_material);
+        this.panel_right = new THREE.Sprite(right_material);
         this.panel_right.scale.set(panel_width_scale, frame_height_scale, 1);
         this.panel_right.position.set(panel_position_offset, 0, 0);
         this.add(this.panel_right);
