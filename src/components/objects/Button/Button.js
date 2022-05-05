@@ -93,8 +93,9 @@ class Button extends Group {
     }
 
     attach_wire(wire_color){
-        const wire_map = new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Cables/cable5.png' );
-        //arc/assets/Cables/cable5.png
+        let wire_map = new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Cables/cable6.png' );
+        //arc/assets/Cables/cable6.png
+        wire_map.minFilter = THREE.LinearFilter;
         const material = new THREE.SpriteMaterial( { map: wire_map, color: wire_color } );
         let wire = new THREE.Sprite( material );
 
