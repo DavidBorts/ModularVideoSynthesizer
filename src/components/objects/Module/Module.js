@@ -321,7 +321,7 @@ class Module extends Group {
                 else {
                     if (!source.parent.updated) {
                         source.parent.update(timestep);
-                        inputs.push(source.data[x][y]);  // DO WE NEED THIS??
+                        inputs.push(source.data[x][y]);
                     }
                     else if (source.data === undefined) {
 
@@ -399,7 +399,7 @@ class Module extends Group {
         };
 
         // Module dimensions
-        var MODULE_WIDTH = parent.MODULE_WIDTH; // CAN WE MAKE MODULE_WIDTH & etc. GLOBAL VARIABLES IN app.js???
+        var MODULE_WIDTH = parent.MODULE_WIDTH;
         var MODULE_HEIGHT = parent.MODULE_HEIGHT;
         // LFOs are shorter than other modules
         if (type === "LFO") {
@@ -414,20 +414,25 @@ class Module extends Group {
         switch (type) {
             case "LFO":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/LFO.png`);
+                map.minFilter = THREE.LinearFilter;
                 break;
             case "Ramp":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Ramp.png`);
+                map.minFilter = THREE.LinearFilter;
                 break;
             case "Wave":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Wave.png`);
+                map.minFilter = THREE.LinearFilter;
                 break;
             case "Vignette":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Vignette.png`);
+                map.minFilter = THREE.LinearFilter;
                 //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Vignette.png
                 //src/assets/modules/Vignette.png
                 break;
             case "Output":
                 map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Output.png`);
+                map.minFilter = THREE.LinearFilter;
                 //
                 //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/modules/Output.png
                 break;
@@ -527,60 +532,6 @@ class Module extends Group {
             
             
         }  
-
-
-
-
-
-/*
-
-
-        
-        // Creating input ports
-        let num_rows_needed = num_inputs / this.input_btns_per_row;
-        let center_this_block = 1 * MODULE_HEIGHT / 4;
-        let inter_row_spacing = ((MODULE_HEIGHT / 3) - 2 * this.min_padding_vert) / (num_rows_needed+1);
-        let start_y = center_this_block + num_rows_needed / 2 * inter_row_spacing;
-        let inter_col_spacing = (MODULE_WIDTH - 2 * this.min_padding_horiz) / (this.input_btns_per_row+1);
-        let start_x = this.min_padding_horiz + inter_col_spacing - MODULE_WIDTH / 2;
-        for(var i = 0; i < num_rows_needed; i++){
-            for(var j = 0; j < this.input_btns_per_row; j++){
-                if(i * this.input_btns_per_row + j == num_inputs) {break;}
-                var btn = new Button(this, "input", start_x + j * inter_col_spacing, start_y - i * inter_row_spacing, 0xccffcc);
-                this.input_list.push(btn);//5 + (i + 1) * (WIDTH - 10) / (num_inputs + 1), 50, 0xffffff));
-                this.add(btn);
-                parent.addToUpdateList(btn);``
-            }
-        }
-
-        // Creating output ports
-        num_rows_needed = num_outputs / this.output_btns_per_row;
-        inter_row_spacing = ((MODULE_HEIGHT / 4)) / (num_rows_needed+1);
-        start_y = - 3 * MODULE_HEIGHT / 8 + (num_rows_needed / 2) * inter_row_spacing;
-        inter_col_spacing = (MODULE_WIDTH - 2 * this.min_padding_horiz) / (this.output_btns_per_row+1);
-        start_x = this.min_padding_horiz + inter_col_spacing - MODULE_WIDTH / 2;
-        for(var i = 0; i < num_rows_needed; i++){
-            for(var j = 0; j < this.output_btns_per_row; j++){
-                console.log("created at ",start_x + j * inter_col_spacing, start_y - i * inter_row_spacing);
-                if(i * this.output_btns_per_row + j == num_outputs) {break;}
-                var btn = new Button(this, "output", start_x + j * inter_col_spacing, start_y - i * inter_row_spacing, 0xccccff);
-                this.output_list.push(btn);
-                this.add(btn);
-                parent.addToUpdateList(btn);
-            }
-        }
-
-        // Creating knobs
-        inter_row_spacing = (MODULE_HEIGHT / 3 - 2 * this.min_padding_vert) / (num_knobs + 1);
-        start_y = (num_knobs / 2 - 1) * inter_row_spacing;
-        for (var i = 0; i < num_knobs; i++) {
-            var knob = new Knob(this, 0, start_y - i * inter_row_spacing);
-            this.knob_list.push(knob);
-            this.add(knob);
-            parent.addToUpdateList(knob);
-        }
-        
-        */
 
         // Add self to parent's update and invalidate lists
         parent.addToUpdateList(this);
