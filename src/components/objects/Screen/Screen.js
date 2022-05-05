@@ -3,14 +3,13 @@ import { Group } from 'three';
 import {Image, Pixel} from 'objects';
 
 class Screen extends Group {
-    constructor(parent, name, Output, xPos, yPos) { // Are we gonna use xPos and yPos??
+    constructor(parent, name, Output) {
 
         // Call parent Group() constructor
         super();
 
         //SCREEN FRAME: 0.45 Screen-widths Wide; 0.5 Screen-Heights Tall
         //SIDE PANEL: 0.275 Screen-widths Wide; 0.5 Screen-Heights Tall
-        //So, if you can make the side panel sprite about 61% the width of the screen w/o changing screw ratio that would be awesome
 
 
         // Variables
@@ -30,28 +29,30 @@ class Screen extends Group {
             this.data.push(newRow);
         }
         
-        this.img = this.flattenData(this.data); // this isn't right
+        this.img = this.flattenData(this.data);
 
         // Setting screen position
         this.position.x = 0;
         this.position.y = this.parent.height / 4;
         this.position.z = 0.3;
 
-                //frame
+        //frame and side panels
        let frame_map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_backpanel.png`);
        //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets
        //src/assets/Screen/screen_backpanel.png
        let frame_material = new THREE.SpriteMaterial({map: frame_map});
-       //console.log(screen_material);
+       let side_map = new THREE.TextureLoader().load(`https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_sidepanel.png`);
+       //https://raw.githubusercontent.com/DavidBorts/ModularVideoSynthesizer/main/src/assets/Screen/screen_sidepanel.png
+       //src/assets/Screen/screen_sidepanel.png
+       let side_material = new THREE.SpriteMaterial({map: side_map});
        this.frame = new THREE.Sprite(frame_material);
        this.frame.scale.set(this.parent.width * 0.45, this.parent.height * 0.5, 1);
-       //this.frame.position.set(0, 0, 0);
        this.add(this.frame); 
-       this.panel_left = new THREE.Sprite(frame_material);
+       this.panel_left = new THREE.Sprite(side_material);
        this.panel_left.scale.set(this.parent.width * 0.55/2, this.parent.height * 0.5, 1);
        this.panel_left.position.set(-(0.55/4+0.45/2)*this.parent.width, 0, 0);
        this.add(this.panel_left); 
-       this.panel_right = new THREE.Sprite(frame_material);
+       this.panel_right = new THREE.Sprite(side_material);
        this.panel_right.scale.set(this.parent.width * 0.55/2, this.parent.height * 0.5, 1);
        this.panel_right.position.set((0.55/4+0.45/2)*this.parent.width,0, 0);
        this.add(this.panel_right); 

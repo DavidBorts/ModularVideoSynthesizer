@@ -23,7 +23,8 @@ let HEIGHT = window.innerHeight;
 let patch_mode = 0;
 let patch_source;
 var CURRENT_KNOB = undefined;
-let default_wire_colors = [0xff0000,0xffa500,0xffff00,0x008000,0x0000ff,0x4b0082,0xee82ee]; //Source: https://colorswall.com/palette/102
+let default_wire_colors = [0x5bd9c8,0xab5bd9,0xd95b81,0xd95b5b,0xd9905b,0xb5d95b,0x8dd95b, 0x5bd97f, 0x5bd9cc, 0x5babd9, 0x5b70d9];
+//let default_wire_colors = [0xff0000,0xffa500,0xffff00,0x008000,0x0000ff,0x4b0082,0xee82ee]; //Source: https://colorswall.com/palette/102
 
 // Initialize core ThreeJS components
 const scene = new ControlPanel(WIDTH, HEIGHT);

@@ -66,9 +66,7 @@ class ControlPanel extends Scene {
         // 1 Output
         const Output = new Module(this, "Output", xmin + (num++ * MODULE_WIDTH), ymin + (MODULE_HEIGHT / 2));
         // 1 Screen
-        let x_screen = 0;
-        let y_screen = 100;
-        this.Screen = new Screen(this, "Screen", Output, x_screen, y_screen);
+        this.Screen = new Screen(this, "Screen", Output);
         
         // Adding modules as children
         this.add(LFO1, LFO2, LFO3, LFO4, Ramp1, Ramp2, Ramp3, Wave1, Wave2, 
