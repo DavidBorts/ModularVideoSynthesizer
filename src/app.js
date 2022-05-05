@@ -17,7 +17,6 @@ import { ControlPanel } from 'scenes';
 import * as THREE from 'three';
 
 // GLobal Variables
-let panel_view = 1; // Toggles module panel (1 is on, 0 off) - DO WE WANT TO DO This??
 let WIDTH = window.innerWidth;
 let HEIGHT = window.innerHeight;
 let patch_mode = 0;
@@ -48,15 +47,13 @@ var raycaster = new THREE.Raycaster();
 // Set up renderer, canvas, and minor CSS adjustments
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(WIDTH, HEIGHT);
-// renderer.setViewport(911, 530);
-//console.log(renderer.getSize());
 const canvas = renderer.domElement;
 canvas.style.display = 'block'; // Removes padding below canvas
 document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
-// DO WE NEED TO ADD ANY TEXT HERE? Tutorial popup?
+// Tutorial Popups would go here with alert()
 
 
 // Render loop

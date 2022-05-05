@@ -383,13 +383,19 @@ class Module extends Group {
                 let b = hueToRGB(m1, m2, h - 1 / 3);
                 var color = new THREE.Vector3(r * 255, g * 255, b * 255);
     
-                sum.add(color.multiplyScalar(w));
+                sum.add(color.multiplyScalar(w*2));
+
                 wsum += w;
             }
 
             // Normalizing
             if (wsum != 0) {
-                sum.divideScalar(wsum);
+                // sum.divideScalar(wsum);
+
+                //clamping
+                sum.x = Math.min(255, Math.max(0, sum.x));
+                sum.y = Math.min(255, Math.max(0, sum.y));
+                sum.z = Math.min(255, Math.max(0, sum.z));
                 output_reference[x][y] = sum;
             }
             else {
