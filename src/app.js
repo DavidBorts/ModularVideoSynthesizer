@@ -7,10 +7,6 @@
  *
  */
 
-
-
-
-
 import { WebGLRenderer, OrthographicCamera, Vector3, Group } from 'three';
 import { DragControls } from 'three/examples/jsm/controls/DragControls.js';
 import { ControlPanel } from 'scenes';
