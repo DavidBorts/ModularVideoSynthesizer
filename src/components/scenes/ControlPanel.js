@@ -29,6 +29,7 @@ class ControlPanel extends Scene {
         // Initialize state
         this.state = {
             //gui: new Dat.GUI(), // Create separate GUI for global scene effects
+            moduleList: [],
             updateList: [],
             invalidateList: []
         };
@@ -84,6 +85,10 @@ class ControlPanel extends Scene {
         this.state.invalidateList.push(object);
     }
 
+    addToModuleList(object) {
+        this.state.moduleList.push(object);
+    }
+
     update(timeStamp) {
         this.Screen.update(timeStamp);
     }
@@ -109,6 +114,10 @@ class ControlPanel extends Scene {
         return new_image;
         // const screen =  this.children[this.children.length - 1];
         // return screen.getImage();
+    }
+
+    getModuleList() {
+        return this.state.moduleList;
     }
 }
 

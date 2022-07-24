@@ -49,6 +49,17 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
+// attempt at filepicker input
+const f_input = document.createElement("input");
+f_input.id = "f_input";
+f_input.display = "none";
+const f_btn = document.createElement("button");
+f_btn.id = "f_btn";
+f_btn.style = "top:0;right:0";
+f_btn.text = "g";
+
+
+
 // Tutorial Popups would go here with alert()
 
 

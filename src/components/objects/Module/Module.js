@@ -542,6 +542,7 @@ class Module extends Group {
         // Add self to parent's update and invalidate lists
         parent.addToUpdateList(this);
         parent.addToInvalidateList(this);
+        parent.addToModuleList(this);
 
         return this;
     }
